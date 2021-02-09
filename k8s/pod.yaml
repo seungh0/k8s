@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metatdata:
+  name: hello-pod
+  labels:
+    app: hello
+spec:
+  containers:
+    - name: hello-container
+      image: seungh0/k8s-study
+      ports:
+        - containerPort: 8000
