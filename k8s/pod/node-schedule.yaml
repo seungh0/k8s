@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-node
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: docker-desktop
+  containers:
+    - name: container
+      image: tmkube/init
