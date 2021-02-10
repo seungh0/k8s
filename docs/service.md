@@ -18,6 +18,8 @@ Service를 통해서도 파드에 접속할 수 있다.
 
 ## Service의 종류
 
+먼저 서비스에 앞서서 파드를 하나 만들어 보겠다.
+
 ### 1. ClusterIP
 
 이 IP는 쿠버네티스 클러스터 내부에서만 접근할 수 있고, 외부에서는 접근할 수 없음.
@@ -26,17 +28,17 @@ Service를 통해서도 파드에 접속할 수 있다.
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-internal-service
+  name: svc-1
 spec:
   selector:
-    app: my-app
-  type: ClusterIP
+    type: web
   ports:
-    - name: http
-      port: 80
-      targetPort: 80
-      protocol: TCP
+    - port: 9000
+      targetPort: 8000
+  type: ClusterIP
 ```
+
+(클러스터 내에서 노드 IP의 9000번 포트로 접근 가능)
 
 #### 사용되는 곳
 
@@ -52,20 +54,19 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nodeport-service
+  name: svc-2
 spec:
   selector:
-    app: my-app
-  type: NodePort
+    type: web
   ports:
-    - name: http
-      port: 80
-      targetPort: 80
-      nodePort: 30036
-      protocol: TCP
+    - port: 9000
+      targetPort: 8000
+      nodePort: 32000
+  type: NodePort
 ```
 
-여기서 nodePort란 node에 어떤 포트를 열어줄지 지정하는 추가 포트임.
+(클러스터 내에서 노드의 9000번 포트로 접근 가능 하며, 추가로 아무 노드IP 로도 32000번 포트로 외부에서 접속 가능하다.
+추가로 externalTrafficPolicy: Local로 설정할 경우, 해당 노드의 IP로만 접근 가능하다)
 
 #### 사용되는 곳
 
@@ -79,6 +80,20 @@ By. 시작하세요 도커/쿠버네티스
 NodePort의 특성 + @의 기능으로
 LoadBalancer 타입의 서비스를 생성하면 로드밸런서가 생겨서 각각의 노드로 트래픽을 분산시켜준다.
 이때 로드밸런서에 접속하기 위한 외부접속 IP는 별도의 플러그인 등을 사용해야한다.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-3
+spec:
+  selector:
+    type: web
+  ports:
+    - port: 9000
+      targetPort: 8000
+  type: LoadBalancer
+```
 
 #### 사용되는 곳
 
