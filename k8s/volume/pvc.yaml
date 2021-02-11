@@ -1,0 +1,39 @@
+# 유저가 PV를 사용하기 위해 PVC를 생성.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-01
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1G
+  storageClassName: ""
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-02
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1G
+  storageClassName: ""
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-03
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1G
+  storageClassName: ""
