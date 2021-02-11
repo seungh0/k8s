@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replica1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: web
+  template:
+    metadata:
+      name: pod1
+      labels:
+        type: web
+    spec:
+      containers:
+        - name: container
+          image: tmkube/app:v1
+      terminationGracePeriodSeconds: 0 # 파드를 삭제하면 기본적으로 30초 후에 삭제가 되도록 설정 되어있음. (바로 삭제됨: 실습 때 빨리 할라고)
+
