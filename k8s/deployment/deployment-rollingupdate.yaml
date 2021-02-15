@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-2
+spec:
+  selector:
+    matchLabels:
+      type: app
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 10 # 10초 텀을 가짐 (실습 때 확인하려고)
+  template:
+    metadata:
+      labels:
+        type: app
+    spec:
+      containers:
+        - name: container
+          image: tmkube/app:v1
