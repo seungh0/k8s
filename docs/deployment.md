@@ -1,8 +1,8 @@
 # Deployment Strategy
 
-## 쿠버네티스 배포 전략
+다양하게 발전하고 있는 서비스 배포 전략 기법에 대해서 정리해봤습니다.
 
-### 1. Recreate
+## 1. Recreate
 
 - 가장 단순한 배포 전략으로, 기존 버전의 파드를 모두 삭제한 다음 새로운 버전의 파드를 생성하는 방법.
 
@@ -12,11 +12,10 @@
 
 <img src ="https://images.contentstack.io/v3/assets/blt300387d93dabf50e/blt2bcee413a9844e96/5ccb571c43283e8d640ed147/recreate-deployment-ww.png">
 
-### 2. Rolling Update
+## 2. Rolling Update
 
-- 기존 버전의 파드를 하나씩 죽이고 새로운 버전의 파드를 하나씩 띄우면서 순차적으로 교체하는 방법이다.
+- 기존 버전의 서버를 하나씩 죽이고 새로운 버전의 서버를 하나씩 띄우면서 순차적으로 교체하는 방법이다.
 - 즉, 서버를 하나 하나씩 버전을 업그레이드 하는 방식
-- 쿠버네티스의 기본 배포 전략이다.
 
 장점)
 
@@ -28,7 +27,7 @@
 
 <img src ="https://images.contentstack.io/v3/assets/blt300387d93dabf50e/blt6743d826f9bc314f/5ccb56f2887e04ba691710fa/rolling-deployment-ww.png">
 
-### 3. Blue/Green
+## 3. Blue/Green
 
 <img src ="https://images.contentstack.io/v3/assets/blt300387d93dabf50e/blt3bd39fbb7a30f3f6/5ccb574ce8ec6ef265db8001/blue-green-deployment-ww.png">
 
@@ -45,7 +44,7 @@
 
 - 배포 시 시스템 자원의 2배를 사용하는 단점
 
-### 4. Canary
+## 4. Canary
 
 <img src="https://images.contentstack.io/v3/assets/blt300387d93dabf50e/blt1942369a1c20bf82/5ccb56d2683c75ef6553878b/canary-deployment-ww.png">
 
