@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-configmap-secret
+spec:
+  containers:
+    - name: container
+      image: ghcr.io/seungh0/k8s-study:latest
+      env:
+        - name: file-c
+          valueFrom:
+            configMapKeyRef:
+              name: cm-file
+              key: file-c.txt
+        - name: file-s
+          valueFrom:
+            secretKeyRef:
+              name: sec-file
+              key: file-s.txt
